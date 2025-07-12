@@ -1,19 +1,24 @@
 {
-  "name": "walrus-blob-reader",
+  "name": "walrus-blob-scanner",
   "version": "1.0.0",
-  "description": "A tool to read Walrus blobs and identify Walrus Sites for SuiNS linking",
+  "description": "A comprehensive CLI tool for managing Walrus blobs with cost-aware cleanup, storage refund tracking, and SuiNS integration",
   "main": "dist/index.js",
   "type": "module",
   "bin": {
-    "walrus-blob-reader": "dist/cli/index.js"
+    "walscan": "dist/cli/index.js",
+    "walrus-scanner": "dist/cli/index.js",
+    "walrus-blob-scanner": "dist/cli/index.js"
   },
+  "preferGlobal": true,
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/cli/index.ts",
     "start": "node dist/cli/index.js",
     "test": "jest",
     "lint": "eslint src/**/*.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build",
+    "postinstall": "echo '\n🎉 Walrus Blob Scanner installed globally!\n\nUsage:\n  walscan --help\n  walscan cleanup <wallet-address>\n\nRequirements:\n  - Walrus CLI: https://docs.wal.app/usage/setup.html\n  - Sui CLI: https://docs.sui.io/references/cli\n'"
   },
   "keywords": [
     "walrus",
@@ -21,10 +26,34 @@
     "blockchain",
     "storage",
     "suins",
-    "blob"
+    "blob",
+    "cleanup",
+    "scanner",
+    "cli",
+    "tool",
+    "cost-analysis",
+    "refund",
+    "orphan-blobs"
   ],
   "author": "Angel",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Angleito/WalrusBlobScanner.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Angleito/WalrusBlobScanner/issues"
+  },
+  "homepage": "https://github.com/Angleito/WalrusBlobScanner#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE",
+    "CONFIG.md"
+  ],
   "dependencies": {
     "@mysten/sui.js": "^0.54.0",
     "@types/js-yaml": "^4.0.9",

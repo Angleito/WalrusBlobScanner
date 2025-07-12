@@ -16,10 +16,35 @@ A comprehensive tool to read Walrus blobs, identify websites, and manage storage
 
 ## Installation
 
+### Global Installation (Recommended)
+
 ```bash
+npm install -g walrus-blob-scanner
+```
+
+After installation, you can use the tool globally:
+```bash
+walscan --help
+walscan cleanup <wallet-address>
+```
+
+### Local Development
+
+```bash
+git clone https://github.com/Angleito/WalrusBlobScanner.git
+cd WalrusBlobScanner
 npm install
 npm run build
 ```
+
+### Prerequisites
+
+Before using the tool, ensure you have the required CLI tools installed:
+
+1. **Walrus CLI**: Install from https://docs.wal.app/usage/setup.html
+2. **Sui CLI**: Install from https://docs.sui.io/references/cli
+
+The tool will validate these dependencies and provide setup guidance if they're missing.
 
 ## CLI Usage
 
@@ -27,53 +52,53 @@ npm run build
 
 ```bash
 # Scan a specific wallet for blobs
-npm run dev wallet-scan <wallet-address>
+walscan wallet-scan <wallet-address>
+
+# Interactive cleanup with cost transparency and safety checks
+walscan cleanup <wallet-address>
 
 # Classify blobs by type and importance
-npm run dev classify <wallet-address> --verbose
-
-# Interactive cleanup with safety checks
-npm run dev cleanup <wallet-address>
+walscan classify <wallet-address> --verbose
 
 # Generate storage cost analysis
-npm run dev cost-analysis <wallet-address>
+walscan cost-analysis <wallet-address>
 
 # Export complete inventory
-npm run dev inventory <wallet-address> --format csv
+walscan inventory <wallet-address> --format csv
 ```
 
-### Original Blob Analysis Commands
+### Blob Analysis Commands
 
 ```bash
 # Analyze a specific blob
-npm run dev analyze <blob-id>
+walscan analyze <blob-id>
 
 # Scan for Walrus Sites (all blobs)
-npm run dev scan --limit 50
+walscan scan --limit 50
 
 # Link a domain to a site
-npm run dev link --domain mydomain.sui --site <site-object-id>
+walscan link --domain mydomain.sui --site <site-object-id>
 
 # Search domains and sites
-npm run dev search --domain keyword
-npm run dev search --address <sui-address>
+walscan search --domain keyword
+walscan search --address <sui-address>
 ```
 
 ### Interactive Mode
 
 ```bash
 # Interactive domain linking
-npm run dev link --interactive
+walscan link --interactive
 ```
 
 ### Network Configuration
 
 ```bash
 # Use testnet
-npm run dev --network testnet scan
+walscan --network testnet scan
 
 # Custom aggregator
-npm run dev --aggregator https://my-aggregator.com analyze <blob-id>
+walscan --aggregator https://my-aggregator.com analyze <blob-id>
 ```
 
 ## Examples
@@ -81,7 +106,7 @@ npm run dev --aggregator https://my-aggregator.com analyze <blob-id>
 ### Wallet Scan and Analysis
 
 ```bash
-npm run dev wallet-scan 0x1234567890abcdef... --verbose
+walscan wallet-scan 0x1234567890abcdef... --verbose
 ```
 
 Output:
@@ -109,13 +134,13 @@ Cost savings: 1250 storage units
 ### Interactive Cleanup
 
 ```bash
-npm run dev cleanup 0x1234567890abcdef... --dry-run
+walscan cleanup 0x1234567890abcdef... --dry-run
 ```
 
 ### Cost Analysis
 
 ```bash
-npm run dev cost-analysis 0x1234567890abcdef...
+walscan cost-analysis 0x1234567890abcdef...
 ```
 
 Output:
@@ -131,7 +156,7 @@ Total savings: 15,000 units
 ### Export Inventory
 
 ```bash
-npm run dev inventory 0x1234567890abcdef... --format csv -o my-wallet-inventory.csv
+walscan inventory 0x1234567890abcdef... --format csv -o my-wallet-inventory.csv
 ```
 
 ## Programmatic Usage
