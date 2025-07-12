@@ -2,7 +2,6 @@ import { Command } from 'commander';
 import chalk from 'chalk';
 import { WalletTracker } from '../../core/wallet-tracker.js';
 import { WalrusClient } from '../../utils/walrus-client.js';
-import { BlobClassifier } from '../../core/blob-classifier.js';
 import { BlobCategory, BlobImportance } from '../../types/index.js';
 import { WalrusSystemQuery } from '../../utils/walrus-system-query.js';
 import { SuiClient } from '@mysten/sui.js/client';

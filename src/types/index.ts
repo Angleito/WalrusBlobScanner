@@ -61,29 +61,7 @@ export interface BlobAnalysis {
   metadata?: Record<string, any>;
 }
 
-export interface RegistryEntry {
-  id: string;
-  blobId: string;
-  objectId?: string;
-  domain?: string;
-  siteName?: string;
-  discoveredAt: Date;
-  lastVerified: Date;
-  isActive: boolean;
-}
 
-export interface BlobClassification {
-  blobId: string;
-  category: BlobCategory;
-  subcategory?: string;
-  importance: BlobImportance;
-  canDelete: boolean;
-  deleteReason?: string;
-  sizeBytes: number;
-  storageCost?: number;
-  referencedBy: string[];
-  lastAccessed?: Date;
-}
 
 export enum BlobCategory {
   WEBSITE = 'website',
@@ -118,10 +96,3 @@ export interface WalletBlobSummary {
   expiredBlobs: number;
 }
 
-export interface DeletionPlan {
-  blobsToDelete: string[];
-  totalSizeReduction: number;
-  costSavings: number;
-  categories: Record<BlobCategory, number>;
-  warnings: string[];
-}

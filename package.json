@@ -1,7 +1,7 @@
 {
   "name": "walrus-blob-scanner",
   "version": "1.0.0",
-  "description": "A comprehensive CLI tool for managing Walrus blobs with cost-aware cleanup, storage refund tracking, and SuiNS integration",
+  "description": "A focused CLI tool for scanning Walrus blob storage and performing cost-aware cleanup with storage refund tracking",
   "main": "dist/index.js",
   "type": "module",
   "bin": {
@@ -51,8 +51,7 @@
   "files": [
     "dist/",
     "README.md",
-    "LICENSE",
-    "CONFIG.md"
+    "LICENSE"
   ],
   "dependencies": {
     "@mysten/sui.js": "^0.54.0",

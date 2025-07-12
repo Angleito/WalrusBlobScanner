@@ -48,57 +48,27 @@ The tool will validate these dependencies and provide setup guidance if they're 
 
 ## CLI Usage
 
-### Wallet Management Commands
+### Core Commands
 
 ```bash
-# Scan a specific wallet for blobs
+# Scan a specific wallet for blobs and analyze storage usage
 walscan wallet-scan <wallet-address>
 
-# Interactive cleanup with cost transparency and safety checks
+# Interactive cleanup with cost transparency and safety checks  
 walscan cleanup <wallet-address>
 
-# Classify blobs by type and importance
-walscan classify <wallet-address> --verbose
-
-# Generate storage cost analysis
-walscan cost-analysis <wallet-address>
-
-# Export complete inventory
-walscan inventory <wallet-address> --format csv
-```
-
-### Blob Analysis Commands
-
-```bash
-# Analyze a specific blob
-walscan analyze <blob-id>
-
-# Scan for Walrus Sites (all blobs)
+# Scan for Walrus Sites across blob storage
 walscan scan --limit 50
-
-# Link a domain to a site
-walscan link --domain mydomain.sui --site <site-object-id>
-
-# Search domains and sites
-walscan search --domain keyword
-walscan search --address <sui-address>
-```
-
-### Interactive Mode
-
-```bash
-# Interactive domain linking
-walscan link --interactive
 ```
 
 ### Network Configuration
 
 ```bash
 # Use testnet
-walscan --network testnet scan
+walscan --network testnet wallet-scan <wallet-address>
 
 # Custom aggregator
-walscan --aggregator https://my-aggregator.com analyze <blob-id>
+walscan --aggregator https://my-aggregator.com scan
 ```
 
 ## Examples
@@ -137,62 +107,34 @@ Cost savings: 1250 storage units
 walscan cleanup 0x1234567890abcdef... --dry-run
 ```
 
-### Cost Analysis
-
-```bash
-walscan cost-analysis 0x1234567890abcdef...
-```
-
-Output:
-```
-Storage Cost Analysis:
-Current Cost: 3450 storage units
-Potential Savings: 1250 units (36.2%)
-12-month projection: 41,400 units
-After cleanup: 26,400 units
-Total savings: 15,000 units
-```
-
-### Export Inventory
-
-```bash
-walscan inventory 0x1234567890abcdef... --format csv -o my-wallet-inventory.csv
-```
+The cleanup command provides:
+- Cost calculation with storage rebate estimates
+- Interactive processing method selection
+- Real-time deletion tracking with actual refund amounts
+- Safety checks to protect website-related blobs
 
 ## Programmatic Usage
 
 ```typescript
 import { 
   WalletTracker, 
-  BlobClassifier, 
-  DeletionManager, 
   WalrusClient, 
   WALRUS_CONFIGS 
-} from 'walrus-blob-reader';
+} from 'walrus-blob-scanner';
 
 // Initialize components
 const config = WALRUS_CONFIGS.mainnet;
 const walletTracker = new WalletTracker(config.rpcUrls[0]);
 const walrusClient = new WalrusClient(undefined, config.rpcUrls[0]);
-const classifier = new BlobClassifier(walrusClient);
-const deletionManager = new DeletionManager(walrusClient);
 
 // Analyze wallet storage
 const summary = await walletTracker.getWalletBlobSummary('0x...');
 console.log('Total blobs:', summary.totalBlobs);
-console.log('Deletable:', summary.deletableBlobs);
+console.log('Total size:', summary.totalSize);
 
-// Get and classify blobs
+// Get blobs for wallet
 const blobs = await walrusClient.listBlobsForWallet('0x...');
-const classifications = await classifier.classifyBlobs(blobs);
-
-// Find websites
-const websites = classifications.filter(c => c.category === 'website');
-console.log('Found websites:', websites.length);
-
-// Create deletion plan
-const deletionPlan = await deletionManager.createDeletionPlan(blobs);
-console.log('Can delete:', deletionPlan.blobsToDelete.length, 'blobs');
+console.log('Found blobs:', blobs.length);
 ```
 
 ## Configuration

@@ -3,27 +3,17 @@
 import { Command } from 'commander';
 import chalk from 'chalk';
 import { BlobReader } from '../core/blob-reader.js';
-import { SuiNSResolver } from '../core/suins-resolver.js';
 import { WALRUS_CONFIGS } from '../config/walrus.js';
 import { ConfigReader } from '../utils/config-reader.js';
-import { analyzeCommand } from './commands/analyze.js';
 import { scanCommand } from './commands/scan.js';
-import { linkCommand } from './commands/link.js';
-import { searchCommand } from './commands/search.js';
 import { walletScanCommand } from './commands/wallet-scan.js';
 import { cleanupCommand } from './commands/cleanup.js';
-import { classifyCommand } from './commands/classify.js';
-import { inventoryCommand } from './commands/inventory.js';
-import { costAnalysisCommand } from './commands/cost-analysis.js';
-import { walletDirectCommand } from './commands/wallet-direct.js';
-import { walletObjectsCommand } from './commands/wallet-objects.js';
-import { inspectSiteCommand } from './commands/inspect-site.js';
 
 const program = new Command();
 
 program
-  .name('walrus-blob-reader')
-  .description('A tool to read Walrus blobs and identify Walrus Sites for SuiNS linking')
+  .name('walscan')
+  .description('A comprehensive CLI tool for scanning and cleaning up Walrus blob storage')
   .version('1.0.0');
 
 program
@@ -57,11 +47,9 @@ program
     
     // Create instances with merged configuration
     const blobReader = new BlobReader(mergedConfig.aggregatorUrl);
-    const suinsResolver = new SuiNSResolver(mergedConfig.walrusConfig);
     
     // Store configurations for commands
     thisCommand.setOptionValue('blobReader', blobReader);
-    thisCommand.setOptionValue('suinsResolver', suinsResolver);
     thisCommand.setOptionValue('config', mergedConfig.walrusConfig);
     thisCommand.setOptionValue('aggregatorUrl', mergedConfig.aggregatorUrl);
     thisCommand.setOptionValue('publisherUrl', mergedConfig.publisherUrl);
@@ -69,18 +57,10 @@ program
     thisCommand.setOptionValue('rpcUrl', mergedConfig.suiRpcUrl);
   });
 
-analyzeCommand(program);
+// Core commands
 scanCommand(program);
-linkCommand(program);
-searchCommand(program);
 walletScanCommand(program);
 cleanupCommand(program);
-classifyCommand(program);
-inventoryCommand(program);
-costAnalysisCommand(program);
-walletDirectCommand(program);
-walletObjectsCommand(program);
-inspectSiteCommand(program);
 
 program
   .command('info')
@@ -90,8 +70,8 @@ program
     const config = parentOptions?.config;
     const configReader = new ConfigReader();
     
-    console.log(chalk.blue('\nWalrus Blob Reader Configuration:'));
-    console.log(chalk.blue('================================\n'));
+    console.log(chalk.blue('\nWalrus Blob Scanner Configuration:'));
+    console.log(chalk.blue('==================================\n'));
     
     // Check for CLI configs
     const { hasSuiConfig, hasWalrusConfig } = await configReader.hasCliConfigs();

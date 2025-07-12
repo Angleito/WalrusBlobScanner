@@ -3,7 +3,6 @@ import chalk from 'chalk';
 import inquirer from 'inquirer';
 import { WalletTracker } from '../../core/wallet-tracker.js';
 import { WalrusClient } from '../../utils/walrus-client.js';
-import { DeletionManager, DeletionOptions } from '../../core/deletion-manager.js';
 import { BlobCategory, BlobImportance } from '../../types/index.js';
 import { CLIValidator } from '../../utils/cli-validator.js';
 import { CostEstimator } from '../../utils/cost-estimator.js';
