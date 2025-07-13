@@ -22,10 +22,10 @@ Since the package is not yet published to npm, install directly from GitHub:
 
 ```bash
 # Install globally from GitHub
-npm install -g git+https://github.com/Angleito/WalrusBlobScanner.git
+npm install -g git+https://github.com/Angleito/Walscan.git
 
 # Or using a specific branch/tag
-npm install -g git+https://github.com/Angleito/WalrusBlobScanner.git#main
+npm install -g git+https://github.com/Angleito/Walscan.git#main
 ```
 
 After installation, you can use the tool globally:
@@ -37,8 +37,8 @@ walscan cleanup <wallet-address>
 ### Local Development
 
 ```bash
-git clone https://github.com/Angleito/WalrusBlobScanner.git
-cd WalrusBlobScanner
+git clone https://github.com/Angleito/Walscan.git
+cd Walscan
 npm install
 npm run build
 

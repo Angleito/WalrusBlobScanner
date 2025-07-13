@@ -39,12 +39,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Angleito/WalrusBlobScanner.git"
+    "url": "https://github.com/Angleito/Walscan.git"
   },
   "bugs": {
-    "url": "https://github.com/Angleito/WalrusBlobScanner/issues"
+    "url": "https://github.com/Angleito/Walscan/issues"
   },
-  "homepage": "https://github.com/Angleito/WalrusBlobScanner#readme",
+  "homepage": "https://github.com/Angleito/Walscan#readme",
   "engines": {
     "node": ">=18.0.0"
   },
