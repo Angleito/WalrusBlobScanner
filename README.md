@@ -1,6 +1,6 @@
-# Walrus Blob Reader
+# walscan
 
-A comprehensive tool to read Walrus blobs, identify websites, and manage storage with intelligent cleanup capabilities.
+A focused CLI tool for scanning Walrus blob storage and performing cost-aware cleanup with storage refund tracking.
 
 ## Features
 
@@ -16,10 +16,16 @@ A comprehensive tool to read Walrus blobs, identify websites, and manage storage
 
 ## Installation
 
-### Global Installation (Recommended)
+### From GitHub (Current Method)
+
+Since the package is not yet published to npm, install directly from GitHub:
 
 ```bash
-npm install -g walrus-blob-scanner
+# Install globally from GitHub
+npm install -g git+https://github.com/Angleito/WalrusBlobScanner.git
+
+# Or using a specific branch/tag
+npm install -g git+https://github.com/Angleito/WalrusBlobScanner.git#main
 ```
 
 After installation, you can use the tool globally:
@@ -35,6 +41,19 @@ git clone https://github.com/Angleito/WalrusBlobScanner.git
 cd WalrusBlobScanner
 npm install
 npm run build
+
+# Run in development mode
+npm run dev
+
+# Or link globally for testing
+npm link
+```
+
+### Future npm Installation
+
+Once published to npm, you'll be able to install with:
+```bash
+npm install -g walrus-blob-scanner
 ```
 
 ### Prerequisites
