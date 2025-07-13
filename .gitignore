@@ -86,3 +86,6 @@ temp/
 
 # DynamoDB Local files
 .dynamodb/
+
+# Claude Code files
+CLAUDE.md
